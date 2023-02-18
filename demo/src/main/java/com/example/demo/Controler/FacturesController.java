@@ -1,8 +1,6 @@
 package com.example.demo.Controler;
 
-import com.example.demo.Model.Client;
 import com.example.demo.Model.Factures;
-import com.example.demo.Repository.ClientRepository;
 import com.example.demo.Repository.FacturesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +24,6 @@ public class FacturesController {
         facRepository.save(empData);
         return ResponseEntity.ok("Data saved");
     }
-
     @GetMapping("/qetAllFactures")
     public List<Factures> getAllFactures() {
         System.out.println("sssssssssssssssssssssssssssssssssssssssssss");
@@ -49,7 +46,7 @@ public class FacturesController {
             return ResponseEntity.notFound().build();
         }
         facRepository.delete(facture);
-        return ResponseEntity.ok("facture supprimé avec succès");
+        return ResponseEntity.ok("facture "+id+" supprimé avec succès");
     }
 
 }
