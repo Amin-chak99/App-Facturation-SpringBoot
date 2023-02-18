@@ -12,7 +12,7 @@ public class Offres {
     @Getter
     @Setter
     @Column(name = "Off_Id")
-    private int id;
+    private int redid;
     @ManyToOne
     @JoinColumn(name = "Off_Clt_Id", referencedColumnName = "id")
     @Getter

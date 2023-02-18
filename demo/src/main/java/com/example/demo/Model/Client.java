@@ -1,13 +1,11 @@
 package com.example.demo.Model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-@Getter
-@Setter
+
+@Data
 @Entity
 @Table
 @AllArgsConstructor
@@ -15,7 +13,8 @@ import lombok.Setter;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "Clt_nom")
     private String name;
@@ -25,5 +24,4 @@ public class Client {
 
     @Column(name = "Clt_adresse")
     private String adresse;
-
 }

@@ -34,9 +34,7 @@ public class OffresController {
     @GetMapping("/getoffrebynid/{id}")
     public Optional<Offres> getByFactures(@PathVariable int id){
         Optional<Offres> offre = offreRepository.findById(id);
-
         return offre;
-
     }
     @DeleteMapping("/deleteoffre/{id}")
     public ResponseEntity<String> deleteClient(@PathVariable("id") Long id) {

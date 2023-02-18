@@ -1,28 +1,25 @@
 package com.example.demo.Model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 import java.util.Date;
+
+@Data
 @Entity
 @Table
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Factures {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Fac_Id")
-    private int fac_id = 1;
+    private int fac_id;
+
     @ManyToOne
-    @JoinColumn(name = "Fac_Clt_Id")
+    @JoinColumn(name = "Fac_Clt_Id" ,referencedColumnName = "id")
     private Client client;
+
     @Column(name = "Fac_Date")
-
     private Date date;
+
     @Column(name = "Fac_Prix")
-
     private Double prix;
-
-
 }
