@@ -19,7 +19,7 @@ public class Etats {
     private Etat etat;
 
     @ManyToOne
-    @JoinColumn(name = "Fac_Id")
+    @JoinColumn(name = "Etat_Fac_Id" , referencedColumnName = "fac_id")
     private Factures factures;
 
     // constructors, getters, and setters

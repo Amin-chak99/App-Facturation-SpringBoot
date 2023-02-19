@@ -1,11 +1,17 @@
 package com.example.demo.Model;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 @Table
 @AllArgsConstructor
@@ -14,7 +20,8 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+
+    private Integer id;
 
     @Column(name = "Clt_nom")
     private String name;
@@ -24,4 +31,8 @@ public class Client {
 
     @Column(name = "Clt_adresse")
     private String adresse;
+
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Factures> factures = new ArrayList<>();
 }
