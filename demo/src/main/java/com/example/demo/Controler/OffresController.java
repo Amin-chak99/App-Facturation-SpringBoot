@@ -18,14 +18,14 @@ public class OffresController {
 
 
     @PostMapping("/saveoffres")
-    public ResponseEntity<String> savefactures(@RequestBody Offres empData) {
-
-        offreRepository.save(empData);
+    public ResponseEntity<String> saveOffres(@RequestBody Offres offdata) {
+        offreRepository.save(offdata);
+        System.out.println(offdata);
         return ResponseEntity.ok("Data saved");
+
     }
     @GetMapping("/qetAlloffres")
     public List<Offres> getAllFactures() {
-        System.out.println("sssssssssssssssssssssssssssssssssssssssssss");
         List<Offres> offres = new ArrayList<>();
         offreRepository.findAll().forEach(x -> offres.add(x));
         System.out.println(offres);

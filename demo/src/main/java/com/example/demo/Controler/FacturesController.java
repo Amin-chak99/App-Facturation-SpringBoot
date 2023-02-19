@@ -1,6 +1,8 @@
 package com.example.demo.Controler;
 
+import com.example.demo.Model.Client;
 import com.example.demo.Model.Factures;
+import com.example.demo.Repository.ClientRepository;
 import com.example.demo.Repository.FacturesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +20,18 @@ public class FacturesController {
     private FacturesRepository facRepository;
 
 
+
     @PostMapping("/savefactures")
     public ResponseEntity<String> savefactures(@RequestBody Factures empData) {
 
         facRepository.save(empData);
         return ResponseEntity.ok("Data saved");
     }
+
+
+
     @GetMapping("/qetAllFactures")
     public List<Factures> getAllFactures() {
-        System.out.println("sssssssssssssssssssssssssssssssssssssssssss");
         List<Factures> factures = new ArrayList<>();
         facRepository.findAll().forEach(x -> factures.add(x));
         System.out.println(factures);

@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -19,9 +19,7 @@ import java.util.List;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-
-    private Integer id;
+    private int id;
 
     @Column(name = "Clt_nom")
     private String name;
@@ -32,7 +30,4 @@ public class Client {
     @Column(name = "Clt_adresse")
     private String adresse;
 
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Factures> factures = new ArrayList<>();
 }
