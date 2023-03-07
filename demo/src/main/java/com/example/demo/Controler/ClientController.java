@@ -2,6 +2,8 @@ package com.example.demo.Controler;
 
 import com.example.demo.Model.Client;
 import com.example.demo.Repository.ClientRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,6 @@ import java.util.Optional;
 
 @RestController
 public class ClientController {
-
 
     @Autowired
     private ClientRepository clientRepository;
@@ -25,14 +26,25 @@ public class ClientController {
     }
     @GetMapping("/getClient")
     public List<Client> getClients(){
-        System.out.println("clients00000000000000000000000000000000000000000000000");
 
         ArrayList<Client> clients = new ArrayList<>();
         clientRepository.findAll().forEach(x -> clients.add(x));
 
-        System.out.println("Liste:"+clients);
 
         return clients;
+
+    }
+    @GetMapping("/getNameClient")
+    public List<String> getNameClients(){
+
+        List<Client> clients = getClients();
+        List<String> names = new ArrayList<>();
+        clients.forEach(s->{
+            names.add(s.getName());
+        });
+
+        return names;
+
 
     }
 
@@ -40,7 +52,7 @@ public class ClientController {
     public Optional<Client> getByClients(@PathVariable int id){
        Optional<Client> client = clientRepository.findById(id);
 
-        return client;
+        return client   ;
 
     }
     @DeleteMapping("/deleteclients/{id}")
