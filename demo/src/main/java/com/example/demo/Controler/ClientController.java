@@ -2,8 +2,6 @@ package com.example.demo.Controler;
 
 import com.example.demo.Model.Client;
 import com.example.demo.Repository.ClientRepository;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,14 +27,10 @@ public class ClientController {
 
         ArrayList<Client> clients = new ArrayList<>();
         clientRepository.findAll().forEach(x -> clients.add(x));
-
-
         return clients;
-
     }
     @GetMapping("/getNameClient")
     public List<String> getNameClients(){
-
         List<Client> clients = getClients();
         List<String> names = new ArrayList<>();
         clients.forEach(s->{
