@@ -8,7 +8,6 @@ import java.util.Date;
 public class Factures {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fac_Id")
     private int fac_id;
     @ManyToOne()
     @JoinColumn(name = "Fac_Clt_Id", referencedColumnName = "id")

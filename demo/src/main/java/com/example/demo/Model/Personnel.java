@@ -1,9 +1,13 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Data
 @Entity
 @Table
@@ -19,11 +23,7 @@ public class Personnel {
     @Column(name = "Nom_Prenom_Per")
     private String nom_prenom;
     @Column(name = "Salaire-Per")
-    private double Salaire;
-    @Column(name = "Accompte_Per")
-    private Double Accompte;
-    @Column(name = "Date_Accompte")
-    private Date date;
+    private String Salaire;
 
 
 
