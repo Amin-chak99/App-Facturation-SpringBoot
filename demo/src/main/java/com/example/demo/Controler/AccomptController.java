@@ -6,6 +6,7 @@ import com.example.demo.Model.Personnel;
 import com.example.demo.Repository.AccompteRepository;
 import com.example.demo.Repository.PersonnelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,10 @@ public class AccomptController {
         ArrayList<Accompte> accomptes = new ArrayList<>();
         accompteRepository.findAll().forEach(x -> accomptes.add(x));
         return accomptes;
+    }
+    @GetMapping("/NomPrenom/{Nomprenom}")
+    public List<Accompte> getAccomptesByNomPrenom(@PathVariable String Nomprenom) {
+        return accompteRepository.findByPersonnel_Nomprenom(Nomprenom);
     }
 
 

@@ -15,8 +15,8 @@ public class Accompte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ACCid;
-    @Column(name = "Accompte")
-    private Double Accompte;
+    @Column(name = "accompte")
+    private Double accompte;
     @Column(name = "Accompte_Date")
     private Date date;
     @ManyToOne()

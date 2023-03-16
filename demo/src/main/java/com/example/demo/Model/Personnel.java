@@ -21,7 +21,7 @@ public class Personnel {
     @Column(name = "Per_Id")
     private int perid;
     @Column(name = "Nom_Prenom_Per")
-    private String nom_prenom;
+    private String nomprenom;
     @Column(name = "Salaire-Per")
     private String Salaire;
 

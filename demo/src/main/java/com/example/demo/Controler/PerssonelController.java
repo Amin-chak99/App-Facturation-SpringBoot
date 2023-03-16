@@ -1,6 +1,4 @@
 package com.example.demo.Controler;
-
-import com.example.demo.Model.Client;
 import com.example.demo.Model.Personnel;
 import com.example.demo.Repository.PersonnelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,6 @@ public class PerssonelController {
     }
     @GetMapping("/getpersonnel")
     public List<Personnel> getPersonnel(){
-
         ArrayList<Personnel> personnels = new ArrayList<>();
         personnelRepository.findAll().forEach(x -> personnels.add(x));
         return personnels;
@@ -34,7 +31,7 @@ public class PerssonelController {
         List<Personnel> clients = getPersonnel();
         List<String> names = new ArrayList<>();
         clients.forEach(s->{
-            names.add(s.getNom_prenom());
+            names.add(s.getNomprenom());
         });
 
         return names;
