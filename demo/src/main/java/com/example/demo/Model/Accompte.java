@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,8 +20,9 @@ public class Accompte {
     private Double accompte;
     @Column(name = "Accompte_Date")
     private Date date;
-    @ManyToOne()
-    @JoinColumn(name = "Acc_Id")
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "idper")
     private Personnel personnel;
 
 }

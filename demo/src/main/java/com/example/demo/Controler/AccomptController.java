@@ -18,24 +18,43 @@ import java.util.Optional;
 public class AccomptController {
     @Autowired
     private AccompteRepository accompteRepository;
-
+    @Autowired
+    private PersonnelRepository personnelRepository;
     @PostMapping("/saveAcompte")
-    public ResponseEntity<String> saveAccompte(@RequestBody Accompte Accomptdata) {
+    public ResponseEntity<String> saveAccompte(@RequestBody AccompteRequest Accomptdata) {
 
-        accompteRepository.save(Accomptdata);
+        Optional<Personnel> per = personnelRepository.findById(Accomptdata.getIdper());
+        Accompte accompte = new Accompte();
+        accompte.setAccompte(Accomptdata.getAccompte());
+        accompte.setPersonnel(per.get());
+        accompte.setDate(Accomptdata.getDate());
+
+
+
+
+        accompteRepository.save(accompte);
         return ResponseEntity.ok("Data saved");
     }
     @GetMapping("/getAcompte")
-    public List<Accompte> getAccompte(){
+    public List<AccompteRequest> getAccompte(){
+        AccompteRequest accompteRequest = new AccompteRequest();
+        List<AccompteRequest> accompteRequests = new ArrayList<>();
+        List<Accompte> accomptes = new ArrayList<>();
+         accomptes = accompteRepository.findAll();
+         accomptes.forEach(a->{
+             accompteRequest.setDate(a.getDate());
+             accompteRequest.setAccompte(a.getAccompte());
+             accompteRequest.setIdper(a.getPersonnel().getPerid());
+             accompteRequests.add(accompteRequest);
+         });
 
-        ArrayList<Accompte> accomptes = new ArrayList<>();
-        accompteRepository.findAll().forEach(x -> accomptes.add(x));
-        return accomptes;
+        return accompteRequests;
     }
     @GetMapping("/NomPrenom/{Nomprenom}")
     public List<Accompte> getAccomptesByNomPrenom(@PathVariable String Nomprenom) {
         return accompteRepository.findByPersonnel_Nomprenom(Nomprenom);
     }
+
 
 
 }

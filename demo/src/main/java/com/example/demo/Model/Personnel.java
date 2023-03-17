@@ -25,6 +25,9 @@ public class Personnel {
     @Column(name = "Salaire-Per")
     private String Salaire;
 
+    @OneToMany(mappedBy = "personnel")
+    private  List<Accompte> accomptes = new ArrayList<>();
+
 
 
 }
