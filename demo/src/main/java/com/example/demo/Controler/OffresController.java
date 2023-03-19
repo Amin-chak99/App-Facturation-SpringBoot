@@ -1,6 +1,8 @@
 package com.example.demo.Controler;
 
+import com.example.demo.Model.Client;
 import com.example.demo.Model.Offres;
+import com.example.demo.Repository.ClientRepository;
 import com.example.demo.Repository.OffreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ public class OffresController {
     @Autowired
     private OffreRepository offreRepository;
 
+    @Autowired
+    private ClientRepository clientRepository;
 
     @PostMapping("/saveoffres")
     public ResponseEntity<String> saveOffres(@RequestBody Offres offdata) {
@@ -25,11 +29,23 @@ public class OffresController {
 
     }
     @GetMapping("/qetAlloffres")
-    public List<Offres> getAllFactures() {
+    public List<OffreRequest> getClients() {
+        List<OffreRequest> offreRequests = new ArrayList<>();
         List<Offres> offres = new ArrayList<>();
-        offreRepository.findAll().forEach(x -> offres.add(x));
-        System.out.println(offres);
-        return offres;
+        offres = offreRepository.findAll();
+        offres.forEach(a->{
+            OffreRequest offreRequest = new OffreRequest();
+
+            offreRequest.setOff_id(a.getRedid());
+            offreRequest.setPrix(a.getPrix());
+
+            offreRequest.setDate(a.getDate());
+            offreRequest.setIdclient(a.getClient().getId());
+            offreRequest.setNomclient(a.getClient().getName() );
+            offreRequests.add(offreRequest);
+        });
+
+        return offreRequests;
     }
     @GetMapping("/getoffrebynid/{id}")
     public Optional<Offres> getByFactures(@PathVariable int id){

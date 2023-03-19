@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
@@ -14,6 +15,7 @@ public class Offres {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Off_Id")
     private int redid;
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "Off_Clt_Id", referencedColumnName = "id")
     private Client client;
