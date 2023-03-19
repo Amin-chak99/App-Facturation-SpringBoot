@@ -32,16 +32,19 @@ public class AccomptController {
 
 
 
+
         accompteRepository.save(accompte);
         return ResponseEntity.ok("Data saved");
     }
     @GetMapping("/getAcompte")
     public List<AccompteRequest> getAccompte(){
-        AccompteRequest accompteRequest = new AccompteRequest();
-        List<AccompteRequest> accompteRequests = new ArrayList<>();
+        final List<AccompteRequest> accompteRequests = new ArrayList<>();
         List<Accompte> accomptes = new ArrayList<>();
          accomptes = accompteRepository.findAll();
          accomptes.forEach(a->{
+             AccompteRequest accompteRequest = new AccompteRequest(); // Nouvelle instance créée à chaque itération
+
+             accompteRequest.setACCid(a.getACCid());
              accompteRequest.setDate(a.getDate());
              accompteRequest.setAccompte(a.getAccompte());
              accompteRequest.setIdper(a.getPersonnel().getPerid());

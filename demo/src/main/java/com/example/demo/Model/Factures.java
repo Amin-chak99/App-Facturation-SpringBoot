@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
@@ -9,6 +10,7 @@ public class Factures {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int fac_id;
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "Fac_Clt_Id", referencedColumnName = "id")
     private Client client;
