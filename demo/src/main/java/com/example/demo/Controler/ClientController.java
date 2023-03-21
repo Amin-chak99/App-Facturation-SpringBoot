@@ -58,5 +58,10 @@ public class ClientController {
         clientRepository.delete(client);
         return ResponseEntity.ok("Client supprimé avec succès");
     }
+    @GetMapping("/getmatByClient/{Name}")
+    public List<Client> clientname(@PathVariable String Name){
+        return clientRepository.findByName(Name);
+
+    }
 
 }

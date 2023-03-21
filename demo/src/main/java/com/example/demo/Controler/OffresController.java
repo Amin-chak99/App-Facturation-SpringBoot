@@ -13,20 +13,15 @@ import java.util.List;
 import java.util.Optional;
 @RestController
 public class OffresController {
-
-
     @Autowired
     private OffreRepository offreRepository;
-
     @Autowired
     private ClientRepository clientRepository;
-
     @PostMapping("/saveoffres")
     public ResponseEntity<String> saveOffres(@RequestBody Offres offdata) {
         offreRepository.save(offdata);
         System.out.println(offdata);
         return ResponseEntity.ok("Data saved");
-
     }
     @GetMapping("/qetAlloffres")
     public List<OffreRequest> getClients() {
@@ -35,16 +30,13 @@ public class OffresController {
         offres = offreRepository.findAll();
         offres.forEach(a->{
             OffreRequest offreRequest = new OffreRequest();
-
             offreRequest.setOff_id(a.getRedid());
             offreRequest.setPrix(a.getPrix());
-
             offreRequest.setDate(a.getDate());
             offreRequest.setIdclient(a.getClient().getId());
             offreRequest.setNomclient(a.getClient().getName() );
             offreRequests.add(offreRequest);
         });
-
         return offreRequests;
     }
     @GetMapping("/getoffrebynid/{id}")
@@ -52,7 +44,7 @@ public class OffresController {
         Optional<Offres> offre = offreRepository.findById(id);
         return offre;
     }
-    @DeleteMapping("/deleteoffre/{id}")
+
     public ResponseEntity<String> deleteClient(@PathVariable("id") Long id) {
         Offres offre = offreRepository.findById(Math.toIntExact(id)).orElse(null);
         if (offre == null) {
