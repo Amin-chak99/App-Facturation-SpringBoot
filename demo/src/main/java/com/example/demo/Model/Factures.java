@@ -2,7 +2,11 @@ package com.example.demo.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Data
 @Entity
 @Table
@@ -20,4 +24,6 @@ public class Factures {
     private Double prix;
     @Column(name = "Etats")
     private String etat;
+    @OneToMany(mappedBy = "factures")
+    private List<Article> article = new ArrayList<>();
 }

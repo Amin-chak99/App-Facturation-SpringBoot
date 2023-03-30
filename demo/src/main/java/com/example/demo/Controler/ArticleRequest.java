@@ -14,12 +14,11 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FactureRequest {
-    private int fac_id;
-    private Double prix;
-    private Date date;
-    private int idclient;
-    private String nomclient;
-    private String etat ;
-    private List<Article> articles ;
+public class ArticleRequest {
+    private int id;
+    private double prix;
+    private double qte;
+
+    private String desq;
+    private int idFac ;
 }
