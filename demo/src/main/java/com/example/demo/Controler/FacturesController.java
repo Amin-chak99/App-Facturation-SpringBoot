@@ -75,6 +75,8 @@ public class FacturesController {
         factureRequest.setIdclient(facture.get().getClient().getId());
         factureRequest.setNomclient(facture.get().getClient().getName());
         factureRequest.setArticle(facture.get().getArticle());
+        factureRequest.setNote(facture.get().getNote());
+
 
 
         return ResponseEntity.ok().body(factureRequest);
