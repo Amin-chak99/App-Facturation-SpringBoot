@@ -21,5 +21,8 @@ public class FactureRequest {
     private int idclient;
     private String nomclient;
     private String etat ;
-    private List<Article> articles ;
+    private String note ;
+
+    private List<Article> article ;
+
 }

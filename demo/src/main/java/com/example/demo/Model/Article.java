@@ -27,6 +27,7 @@ public class Article {
     private double ArtQte;
     @Column(name = "Art_Prix")
     private double ArtPrix;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idFacture")

@@ -18,6 +18,7 @@ public class FacturesController {
     private ClientRepository clientRepository;
     @Autowired
     private ArticleRepository articleRepository;
+    List<FactureRequest> factureRequests ;
     @PostMapping("/savefactures")
     public ResponseEntity<String> savefactures(@RequestBody FactureRequest FacData) {
 
@@ -28,6 +29,7 @@ public class FacturesController {
         factures.setPrix(FacData.getPrix());
         factures.setDate(FacData.getDate());
         factures.setEtat(FacData.getEtat());
+        factures.setNote(FacData.getNote());
         factures.setClient(per.get());
 
 
@@ -36,7 +38,7 @@ public class FacturesController {
     }
     @GetMapping("/qetAllFactures")
     public List<FactureRequest> getAllFactures() {
-        List<FactureRequest> factureRequests = new ArrayList<>();
+        factureRequests = new ArrayList<>();
         List<Factures> factures = new ArrayList<>();
         factures = facRepository.findAll();
         factures.forEach(a->{
@@ -47,7 +49,9 @@ public class FacturesController {
             factureRequest.setEtat(a.getEtat());
             factureRequest.setIdclient(a.getClient().getId());
             factureRequest.setNomclient(a.getClient().getName() );
-            factureRequest.setArticles(a.getArticle());
+            factureRequest.setArticle(a.getArticle());
+            factureRequest.setNote(a.getNote());
+
 
 
            factureRequests.add(factureRequest);
@@ -56,10 +60,26 @@ public class FacturesController {
         return factureRequests;
     }
     @GetMapping("/getfacbynid/{id}")
-    public Optional<Factures> getByFactures(@PathVariable int id){
+
+    public ResponseEntity<FactureRequest> getByFactures(@PathVariable(value = "id") int id) {
         Optional<Factures> facture = facRepository.findById(id);
-        return facture;
+        if (facture == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        FactureRequest factureRequest = new FactureRequest();
+        factureRequest.setFac_id(facture.get().getFac_id());
+        factureRequest.setPrix(facture.get().getPrix());
+        factureRequest.setDate(facture.get().getDate());
+        factureRequest.setEtat(facture.get().getEtat());
+        factureRequest.setIdclient(facture.get().getClient().getId());
+        factureRequest.setNomclient(facture.get().getClient().getName());
+        factureRequest.setArticle(facture.get().getArticle());
+
+
+        return ResponseEntity.ok().body(factureRequest);
     }
+
     @DeleteMapping("/deletefacture/{id}")
     public ResponseEntity<String> deleteClient(@PathVariable("id") Long id) {
         Factures facture = facRepository.findById(Math.toIntExact(id)).orElse(null);

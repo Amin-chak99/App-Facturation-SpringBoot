@@ -24,6 +24,8 @@ public class Factures {
     private Double prix;
     @Column(name = "Etats")
     private String etat;
-    @OneToMany(mappedBy = "factures")
+    @Column(name = "Note")
+    private String note;
+    @OneToMany(mappedBy = "factures", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Article> article = new ArrayList<>();
 }
