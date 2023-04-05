@@ -30,6 +30,7 @@ public class FacturesController {
         factures.setDate(FacData.getDate());
         factures.setEtat(FacData.getEtat());
         factures.setNote(FacData.getNote());
+        factures.setTimber(FacData.getTimber());
         factures.setClient(per.get());
 
 
@@ -51,8 +52,7 @@ public class FacturesController {
             factureRequest.setNomclient(a.getClient().getName() );
             factureRequest.setArticle(a.getArticle());
             factureRequest.setNote(a.getNote());
-
-
+            factureRequest.setTimber(a.isTimber());
 
            factureRequests.add(factureRequest);
         });
@@ -76,8 +76,7 @@ public class FacturesController {
         factureRequest.setNomclient(facture.get().getClient().getName());
         factureRequest.setArticle(facture.get().getArticle());
         factureRequest.setNote(facture.get().getNote());
-
-
+        factureRequest.setTimber(facture.get().isTimber());
 
         return ResponseEntity.ok().body(factureRequest);
     }

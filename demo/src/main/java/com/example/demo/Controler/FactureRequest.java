@@ -22,6 +22,7 @@ public class FactureRequest {
     private String nomclient;
     private String etat ;
     private String note ;
+    private Boolean timber ;
 
     private List<Article> article ;
 

@@ -26,6 +26,8 @@ public class Factures {
     private String etat;
     @Column(name = "Note")
     private String note;
+    @Column(name = "Timber")
+    private boolean timber;
     @OneToMany(mappedBy = "factures", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Article> article = new ArrayList<>();
 }
