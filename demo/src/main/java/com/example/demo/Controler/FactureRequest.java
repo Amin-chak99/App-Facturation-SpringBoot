@@ -1,7 +1,7 @@
 package com.example.demo.Controler;
 
 
-import com.example.demo.Model.Article;
+import com.example.demo.Model.ArticleFacture;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +24,6 @@ public class FactureRequest {
     private String note ;
     private Boolean timber ;
 
-    private List<Article> article ;
+    private List<ArticleFacture> article ;
 
 }

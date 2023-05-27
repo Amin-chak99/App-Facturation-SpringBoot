@@ -1,9 +1,13 @@
 package com.example.demo.Controler;
 
-import com.example.demo.Model.Article;
+import com.example.demo.Model.ArticleFacture;
+import com.example.demo.Model.ArticleOffre;
 import com.example.demo.Model.Factures;
+import com.example.demo.Model.Offres;
+import com.example.demo.Repository.ArticleOffRepository;
 import com.example.demo.Repository.ArticleRepository;
 import com.example.demo.Repository.FacturesRepository;
+import com.example.demo.Repository.OffreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,24 +22,24 @@ import java.util.Optional;
 
 @RestController
 
-public class ArticleController {
+public class ArticleOffreController {
     @Autowired
-    private ArticleRepository articleRepository ;
+    private ArticleOffRepository articleOffRepository ;
     @Autowired
-    private FacturesRepository facturesRepository ;
+    private OffreRepository offreRepository ;
 
     @GetMapping("/getArticle")
-    public List<ArticleRequest> GetArticle(){
-        List<ArticleRequest> articleRequests = new ArrayList<>();
-        List<Article> articles = new ArrayList<>();
-        articles = articleRepository.findAll();
+    public List<ArticleOffreRequest> GetArticle(){
+        List<ArticleOffreRequest> articleRequests = new ArrayList<>();
+        List<ArticleOffre> articles = new ArrayList<>();
+        articles = articleOffRepository.findAll();
         articles.forEach(a -> {
-            ArticleRequest articleRequest = new ArticleRequest();
+            ArticleOffreRequest articleRequest = new ArticleOffreRequest();
             articleRequest.setId(a.getId());
             articleRequest.setDesq(a.getArtDesc());
             articleRequest.setPrix(a.getArtPrix());
             articleRequest.setQte(a.getArtQte());
-            articleRequest.setIdFac(a.getFactures().getFac_id());
+            articleRequest.setIdOffre(a.getOffres().getRedid());
 
             articleRequests.add(articleRequest);
 
@@ -45,22 +49,24 @@ public class ArticleController {
         return articleRequests;
     }
     @PostMapping("/saveArticle")
-    public ResponseEntity<String> saveArticle(@RequestBody List<ArticleRequest> ArtData) {
+    public ResponseEntity<String> saveArticle(@RequestBody List<ArticleOffreRequest> ArtData) {
 
         String successMessage = "";
 
-        try {
-            for(ArticleRequest a : ArtData) {
-                Optional<Factures> fac = facturesRepository.findById(a.getIdFac());
 
-                Article article = new Article();
+
+        try {
+            for(ArticleOffreRequest a : ArtData) {
+                Optional<Offres> off = offreRepository.findById(a.getIdOffre());
+
+                ArticleOffre article = new ArticleOffre();
                 article.setArtDesc(a.getDesq());
                 article.setArtQte(a.getQte());
                 article.setArtPrix(a.getPrix());
-                article.setFactures(fac.get());
+                article.setOffres(off.get());
 
-                articleRepository.save(article);
-                successMessage += "Articles ajoutés avec succès à la facture avec l'ID : " + a.getIdFac() + "\n";
+                articleOffRepository.save(article);
+                successMessage += "Articles ajoutés avec succès à l'offre avec l'ID : " + a.getIdOffre() + "\n";
             }
 
             return new ResponseEntity<>(successMessage, HttpStatus.OK);

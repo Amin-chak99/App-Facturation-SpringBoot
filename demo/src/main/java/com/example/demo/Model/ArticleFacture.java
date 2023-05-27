@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @Entity
 @Table
@@ -15,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Article {
+public class ArticleFacture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

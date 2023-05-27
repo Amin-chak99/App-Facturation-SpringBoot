@@ -29,5 +29,5 @@ public class Factures {
     @Column(name = "Timber")
     private boolean timber;
     @OneToMany(mappedBy = "factures", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Article> article = new ArrayList<>();
+    private List<ArticleFacture> article = new ArrayList<>();
 }
