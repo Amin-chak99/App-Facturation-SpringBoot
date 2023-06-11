@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class ArticleOffreController {
     @Autowired
     private OffreRepository offreRepository ;
 
-    @GetMapping("/getArticleOffre")
+        @GetMapping("/getArticleOffre")
     public List<ArticleOffreRequest> GArticle(){
         List<ArticleOffreRequest> articleRequests = new ArrayList<>();
         List<ArticleOffre> articles = new ArrayList<>();
@@ -45,6 +47,7 @@ public class ArticleOffreController {
         return articleRequests;
     }
     @PostMapping("/saveArticleOffre")
+
     public ResponseEntity<String> svArticle(@RequestBody List<ArticleOffreRequest> ArtData) {
 
         String successMessage = "";

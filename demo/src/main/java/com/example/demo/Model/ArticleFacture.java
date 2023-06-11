@@ -29,4 +29,5 @@ public class ArticleFacture {
     @ManyToOne
     @JoinColumn(name = "idFacture")
     private Factures factures;
+
 }

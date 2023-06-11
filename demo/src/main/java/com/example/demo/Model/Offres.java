@@ -3,7 +3,11 @@ package com.example.demo.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -24,5 +28,7 @@ public class Offres {
     @Column(name = "Off_Prix")
     private Double prix;
 
+    @OneToMany(mappedBy = "offres")
+    private List<ArticleOffre> article = new ArrayList<>();
 
 }

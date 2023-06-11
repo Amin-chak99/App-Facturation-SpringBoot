@@ -37,7 +37,7 @@ public class FacturesController {
         facRepository.save(factures);
         return ResponseEntity.ok("Data saved");
     }
-    @GetMapping("/qetAllF&actures")
+    @GetMapping("/qetAllFactures")
     public List<FactureRequest> getAllFactures() {
         factureRequests = new ArrayList<>();
         List<Factures> factures = new ArrayList<>();
