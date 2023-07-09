@@ -1,16 +1,16 @@
 package com.example.demo.Controler.Article;
 
 import com.example.demo.Model.ArticleFacture;
+import com.example.demo.Model.ArticleOffre;
 import com.example.demo.Model.Factures;
+import com.example.demo.Model.Offres;
 import com.example.demo.Repository.ArticleRepository;
 import com.example.demo.Repository.FacturesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +69,21 @@ public class ArticleFacController {
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @Transactional
+    @DeleteMapping("/deleteFacture/{id}")
+    public void deleteFactureWithArticles(@PathVariable("id") Factures factureId) {
+        try {
+            // Delete articles of the offer
+            List<ArticleFacture> articles = articleRepository.findByFactures(factureId);
+            articleRepository.deleteAll(articles);
+
+            // Delete the offer
+            facturesRepository.deleteById(factureId.getFac_id());
+        } catch (Exception e) {
+            // Handle any exception that occurred during deletion
+            throw new RuntimeException("Failed to delete facture with articles", e);
         }
     }
 

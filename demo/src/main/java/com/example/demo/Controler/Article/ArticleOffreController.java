@@ -7,10 +7,7 @@ import com.example.demo.Repository.OffreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -74,5 +71,24 @@ public class ArticleOffreController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @Transactional
+    @DeleteMapping("/deleteoffres/{id}")
+    public void deleteOfferWithArticles(@PathVariable("id")  Offres offerId) {
+        try {
+            // Delete articles of the offer
+            List<ArticleOffre> articles = articleOffRepository.findByOffres(offerId);
+            articleOffRepository.deleteAll(articles);
+
+            // Delete the offer
+            offreRepository.deleteById(offerId.getRedid());
+        } catch (Exception e) {
+            // Handle any exception that occurred during deletion
+            throw new RuntimeException("Failed to delete offer with articles", e);
+        }
+    }
+
+
 
 }
